@@ -17,8 +17,6 @@ namespace SimpleChatApplicationWithDatabasePersistence.Data
         }
         public IDbSet<ChatUserDetail> ChatUserDetails { get; set; }
         public IDbSet<ChatMessageDetail> ChatMessageDetails { get; set; }
-        public IDbSet<ChatPrivateMessageMaster> ChatPrivateMessageMasters { get; set; }
-        public IDbSet<ChatPrivateMessageDetail> ChatPrivateMessageDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

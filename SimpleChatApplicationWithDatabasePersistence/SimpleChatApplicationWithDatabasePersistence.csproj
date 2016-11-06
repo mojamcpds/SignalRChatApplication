@@ -233,23 +233,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatDbContext.cs" />
     <Compile Include="ChatHub.cs" />
-    <Compile Include="Data\ChatDbContext.cs" />
-    <Compile Include="Data\IUnitOfWork.cs" />
-    <Compile Include="Data\Repositories\ChatMessageDetailRepository.cs" />
-    <Compile Include="Data\Repositories\ChatPrivateMessageDetailRepository.cs" />
-    <Compile Include="Data\Repositories\ChatPrivateMessageMasterRepository.cs" />
-    <Compile Include="Data\Repositories\ChatUserDetailRepository.cs" />
-    <Compile Include="Data\Repositories\Repository.cs" />
-    <Compile Include="Data\Repository.Contracts\IChatMessageDetailRepository.cs" />
-    <Compile Include="Data\Repository.Contracts\IChatPrivateMessageDetailRepository.cs" />
-    <Compile Include="Data\Repository.Contracts\IChatPrivateMessageMasterRepository.cs" />
-    <Compile Include="Data\Repository.Contracts\IChatUserDetailRepository.cs" />
-    <Compile Include="Data\Repository.Contracts\IRepository.cs" />
-    <Compile Include="Data\UnitOfWork.cs" />
     <Compile Include="Models\ChatMessageDetail.cs" />
-    <Compile Include="Models\ChatPrivateMessageDetail.cs" />
-    <Compile Include="Models\ChatPrivateMessageMaster.cs" />
     <Compile Include="Models\ChatUserDetail.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
