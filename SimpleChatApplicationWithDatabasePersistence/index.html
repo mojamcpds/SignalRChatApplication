@@ -4,11 +4,14 @@
     <title></title>
 
     <link rel="stylesheet" href="/Css/ChatStyle.css" />
+    <link href="Css/StyleSheet.css" rel="stylesheet" />
     <link rel="stylesheet" href="/Css/JQueryUI/themes/base/jquery.ui.all.css" />
-
+    <link href="Scripts/bootstrap.css" rel="stylesheet" />
     <!--Reference the jQuery library. -->
     <script src="/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
 
+    <link href="font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet" />
     <script src="/Scripts/ui/jquery.ui.core.js"></script>
     <script src="/Scripts/ui/jquery.ui.widget.js"></script>
     <script src="/Scripts/ui/jquery.ui.mouse.js"></script>
@@ -22,6 +25,7 @@
     <script src="/signalr/hubs"></script>
 
     <script type="text/javascript">
+        var j = 1;
         $(function () {
             //clearInterval(refreshId);
             setScreen(false);
@@ -82,7 +86,9 @@
             
             //Send message 
             $('#btnSendMsg').click(function () {
+               
                 var msg = $("#txtMessage").val();
+               // alert(msg);
                 if (msg.length > 0) {
 
                     var userName = $('#hdUserName').val();
@@ -148,10 +154,12 @@
             var code = "";
 
             if (userEmail == email && $('.loginUser').length == 0) {
-                code = $('<div class="loginUser">' + name + "</div>");
+               // code = $('<div class="loginUser">' + name + "</div>");
+                code = $(' <li class="btn-warning"><a  id="' + id + '" class="loginUser"><i class="fa fa-user fa-fw"></i>' + name + '</a></li>');
             }
             else {
-                code = $('<a id="' + id + '" class="user" >' + name + '<a>');
+                code = $(' <li><a  id="'+id+'" class="user"><i class="fa fa-user fa-fw"></i>'+name+'</a></li>');
+               
             }
 
             $("#divusers").append(code);
@@ -159,27 +167,119 @@
 
         // Add Message
         function AddMessage(userName, message) {
-            $('#divChatWindow').append('<div class="message"><span class="userName">' + userName + '</span>: ' + message + '</div>');
-
-            var height = $('#divChatWindow')[0].scrollHeight;
-            $('#divChatWindow').scrollTop(height);
+          
+           
+           
+            var html=''
+            if (j % 2 != 0) {
+                 html = '<div class="chat-box-left">' + message + '</div>' +
+                    '<div class="chat-box-name-left">' +
+                                '<i class="fa fa-user fa-fw">-' + userName + '</div>' +
+                                '<hr class="hr-clas">';
+            }
+            else
+            {
+                html = '<div class="chat-box-right">' + message + '</div>' +
+                   '<div class="chat-box-name-right">' +
+                               '<i class="fa fa-user fa-fw">-' + userName + '</div>' +
+                               '<hr class="hr-clas">';
+            }
+            j++;
+            $('.chat').append(html);
+            
         }
         // ------------------------------------------------------------------End All Chat ----------------------------------------------------------------------//
         
     </script>
+   
+    <style>
+        @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css");
+        .chat {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+            .chat li {
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px dotted #B3A9A9;
+            }
+
+                .chat li.left .chat-body {
+                    margin-left: 60px;
+                }
+
+                .chat li.right .chat-body {
+                    margin-right: 60px;
+                }
 
 
+                .chat li .chat-body p {
+                    margin: 0;
+                    color: #777777;
+                }
+
+            .panel .slidedown .glyphicon, .chat .glyphicon {
+                margin-right: 5px;
+            }
+
+        .panel-body1 {
+            overflow-y: scroll;
+            height: 350px;
+        }
+
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar {
+            width: 12px;
+            background-color: #F5F5F5;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #555;
+        }
+        .chat-box-left {
+            width: 100%;
+            height: auto;
+            padding: 15px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            position: relative;
+            border: 1px solid #C5C5C5;
+            font-size: 12px;
+        }
+
+            .chat-box-left:after {
+                top: 100%;
+                left: 10%;
+                border: solid transparent;
+                content: " ";
+                position: absolute;
+                border-top-color: #C5C5C5;
+                border-width: 15px;
+                margin-left: -15px;
+            }
+
+    </style>
 </head>
 <body>
-    <div id="header">
+    <!--<div id="header">
         Simple Chat Room
-    </div>
+    </div>-->
+    <br/>
+    <br/>
     <br />
     <br />
     <br />
 
     <div id="divContainer">
-        <div id="divLogin" class="login">
+        <!--<div id="divLogin" class="login">
             <div>
                 Please Enter Your Name:<br />
                 <input id="txtNickName" type="text" class="textBox" />
@@ -191,29 +291,121 @@
             <div id="divButton">
                 <input id="btnStartChat" type="button" class="submitButton" value="Start Chat" />
             </div>
-        </div>
+        </div>-->
+        <div class="row login" id="divLogin">
+            <div class="col-md-4 col-md-offset-4">
+                <div class="login-panel panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Please Join To Chat</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <div class="validation-summary-valid" data-valmsg-summary="true">
+                                <ul>
+                                    <li style="display:none"></li>
+                                </ul>
+                            </div>
+                        </div>
 
-        <div id="divChat" class="chatRoom">
-            <div class="title">
-                Welcome to Chat Room [<span id='spanUser'></span>]
+                        <fieldset>
+                            <section id="loginForm">
 
-            </div>
-            <div class="content">
-                <div id="divChatWindow" class="chatWindow">
+
+                                <div class="form-group">
+                                    <input class="form-control" data-val="true" data-val-required="The Password field is required." id="txtNickName" name="txtNickName" placeholder="Nick Name" type="text">
+                                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <input class="form-control" data-val="true" data-val-regex="Email is not Valid" data-val-regex-pattern="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" data-val-required="Email Required" id="txtEmailId" name="txtEmailId" placeholder="E-mail" type="text" value="">
+                                    <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                                </div>
+
+
+
+
+
+
+
+                                <input id="btnStartChat" type="button" value="Start Chat" class="btn btn-lg btn-success btn-block submitButton">
+
+
+
+
+                            </section>
+                        </fieldset>
+
+                    </div>
                 </div>
-                <div id="divusers" class="users">
-                </div>
-            </div>
-            <div class="messageBar">
-                <input class="textbox" type="text" id="txtMessage" />
-                <input id="btnSendMsg" type="button" value="Send" class="submitButton" />
             </div>
         </div>
+                <div id="divChat">
 
-        <input id="hdId" type="hidden" />
-        <input id="hdUserName" type="hidden" />
-        <input id="hdEmailID" type="hidden" />
-    </div>
+                    <div class="content">
+                        <!--<div id="divChatWindow" class="chatWindow">
+                        </div>-->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading" id="accordion">
+                                            <span class="glyphicon glyphicon-comment"></span> GROUP CHAT HISTORY [<span id='spanUser'></span>]
+                                            <div class="btn-group pull-right">
+                                                <a type="button" class="btn btn-default btn-xs accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                    <span class="glyphicon glyphicon-chevron-down"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-collapse in" id="collapseOne">
+                                            <div class="panel-body panel-body1">
+                                                <ul class="chat"></ul>
+                                            </div>
+                                            <div class="panel-footer">
+                                                <div class="input-group">
+                                                    <!--  <input id="txtmessage" type="text" class="form-control input-sm" placeholder="Type your message here..." />-->
+                                                    <input class="textbox" type="text" id="txtMessage" style="width:95%" placeholder="Type your message here..." />
+                                                    <span class="input-group-btn">
+                                                        <input id="btnSendMsg" type="button" value="Send" class="btn btn-warning btn-sm" />
+                                                        <!--<button class="btn btn-warning btn-sm" id="btnSendMsg">
+                                                            Send
+                                                        </button>-->
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="chat-box-online-div">
+                                        <div class="chat-box-online-head">
+                                            CHAT USERS 
+                                        </div>
+                                        <div class="panel-body chat-box-online">
+                                            <div>
+                                                <ul class="nav in users" id="divusers"></ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<div class="messageBar">
+                        <input class="textbox" type="text" id="txtMessage" />
+                        <input id="btnSendMsg" type="button" value="Send" class="submitButton" />
+                    </div>-->
+                </div>
+
+
+
+                <input id="hdId" type="hidden" />
+                <input id="hdUserName" type="hidden" />
+                <input id="hdEmailID" type="hidden" />
+            </div>
 
 </body>
 </html>
