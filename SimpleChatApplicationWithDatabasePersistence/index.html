@@ -26,6 +26,7 @@
 
     <script type="text/javascript">
         var j = 1;
+        var heightTotal = 0;
         $(function () {
             //clearInterval(refreshId);
             setScreen(false);
@@ -186,7 +187,10 @@
             }
             j++;
             $('.chat').append(html);
-            
+           
+           var   height = $('.panel-body1').height();
+           heightTotal = heightTotal + height;
+             $(".panel-body1").scrollTop(heightTotal);
         }
         // ------------------------------------------------------------------End All Chat ----------------------------------------------------------------------//
         
